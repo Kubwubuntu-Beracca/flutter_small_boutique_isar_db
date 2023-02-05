@@ -1,6 +1,5 @@
 import 'package:boutique/presentation/screens/category/categories_screen.dart';
-import 'package:boutique/presentation/screens/product/produts_over_view_screen.dart';
-import 'package:boutique/providers/products.dart';
+import 'package:boutique/presentation/screens/over_view_screen.dart';
 import 'package:boutique/widgets/cart.dart';
 import 'package:boutique/widgets/product_item.dart';
 import 'package:flutter/material.dart';

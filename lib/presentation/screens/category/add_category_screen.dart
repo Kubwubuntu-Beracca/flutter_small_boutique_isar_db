@@ -1,7 +1,7 @@
 // ignore_for_file: unused_field, prefer_final_fields
 
 import 'package:boutique/models/category.dart';
-import 'package:boutique/providers/categories.dart';
+import 'package:boutique/providers/isar_services.dart';
 import 'package:boutique/widgets/show_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -30,7 +30,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
         print('UPDATE');
       } else {
         print('ADDjjj');
-        Provider.of<Categories>(context, listen: false)
+        Provider.of<IsarServices>(context, listen: false)
             .saveCategory(Category()..title = titleController.text);
         CustomSnackBar.mySnackBar(
             context, 'New category ${titleController.text} Saved in DB');
@@ -48,7 +48,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       final categoryId = ModalRoute.of(context)!.settings.arguments;
       print('helllo$categoryId');
       if (categoryId != null) {
-        final foundCategory = Provider.of<Categories>(context, listen: false)
+        final foundCategory = Provider.of<IsarServices>(context, listen: false)
             .findById(categoryId);
         verifierId = foundCategory.id.toString();
         titleController.text = foundCategory.title;

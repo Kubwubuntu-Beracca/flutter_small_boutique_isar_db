@@ -3,13 +3,15 @@ import 'package:boutique/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 
-class Categories with ChangeNotifier {
+class IsarServices with ChangeNotifier {
   late Future<Isar> db;
-  Categories() {
+  IsarServices() {
     db = openDB();
   }
   List<Category> _categories = [];
   List<Category> get categories => _categories;
+  List<Product> _products = [];
+  List<Product> get products => _products;
 
   Future<void> saveCategory(Category newCategory) async {
     final isar = await db;
@@ -54,11 +56,25 @@ class Categories with ChangeNotifier {
     return _categories.firstWhere((cat) => cat.id == id);
   }
 
+//============================PRODUCT SECTION=============================
+  Future<void> saveProduct(Product newProduct) async {
+    final isar = await db;
+    isar.writeTxnSync<int>(() => isar.products.putSync(newProduct));
+    _products.add(newProduct);
+    notifyListeners();
+  }
+
+  Future<void> getAllProducts() async {
+    final isar = await db;
+    final response = await isar.products.where().findAll();
+    _products = response;
+    notifyListeners();
+  }
+
   Future<Isar> openDB() async {
-    //check if has an instance already running
     if (Isar.instanceNames.isEmpty) {
       return await Isar.open(
-        [CategorySchema],
+        [CategorySchema, ProductSchema],
         inspector: true,
       );
     }

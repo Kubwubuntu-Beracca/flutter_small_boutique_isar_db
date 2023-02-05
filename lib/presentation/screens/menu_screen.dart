@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'product/add_product_screen.dart';
+import 'product/products_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -44,7 +45,7 @@ class MenuScreen extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Navigator.of(context).pushNamed(AddProuctScreen.routeName);
+                Navigator.of(context).pushNamed(ProductsScreen.routeName);
               },
               child: const ListTile(
                 leading: Icon(Icons.production_quantity_limits),

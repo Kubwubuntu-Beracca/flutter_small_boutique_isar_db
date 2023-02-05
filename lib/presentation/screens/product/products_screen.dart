@@ -6,16 +6,17 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/isar_services.dart';
 import '../../../widgets/show_snackbar.dart';
+import 'add_product_screen.dart';
 
-class CategoriesScreen extends StatefulWidget {
-  static const routeName = '/categories';
-  const CategoriesScreen({super.key});
+class ProductsScreen extends StatefulWidget {
+  static const routeName = '/products';
+  const ProductsScreen({super.key});
 
   @override
-  State<CategoriesScreen> createState() => _CategoriesScreenState();
+  State<ProductsScreen> createState() => _ProductsScreenState();
 }
 
-class _CategoriesScreenState extends State<CategoriesScreen> {
+class _ProductsScreenState extends State<ProductsScreen> {
   var _isInit = true;
   bool _isLoading = false;
   @override
@@ -24,7 +25,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       setState(() {
         _isLoading = true;
       });
-      Provider.of<IsarServices>(context).getAllCategories().then((_) {
+      Provider.of<IsarServices>(context).getAllProducts().then((_) {
         setState(() {
           _isLoading = false;
         });
@@ -37,14 +38,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final categories = Provider.of<IsarServices>(context).categories;
+    final products = Provider.of<IsarServices>(context).products;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Categories'),
+        title: const Text('Products'),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(AddCategoryScreen.routeName);
+              Navigator.of(context).pushNamed(AddProuctScreen.routeName);
             },
             icon: const Icon(Icons.add),
           )
@@ -60,12 +61,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 children: [
                   Expanded(
                     child: ListView.builder(
-                        itemCount: categories.length,
+                        itemCount: products.length,
                         itemBuilder: (context, index) {
                           return Card(
                             child: ListTile(
-                              leading: Text(categories[index].id.toString()),
-                              title: Text(categories[index].title),
+                              leading: Text(products[index].id.toString()),
+                              title: Text(products[index].name),
+                              subtitle: Text(products[index].price),
                               trailing: SizedBox(
                                 width: 100,
                                 child: Row(
@@ -74,9 +76,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                       onPressed: () {
                                         Navigator.of(context).pushNamed(
                                           AddCategoryScreen.routeName,
-                                          arguments: categories[index].id,
+                                          arguments: products[index].id,
                                         );
-                                        print('Id:${categories[index].id}');
+                                        print('Id:${products[index].id}');
                                       },
                                       icon: const Icon(
                                         Icons.edit,
@@ -86,11 +88,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                     Consumer<IsarServices>(
                                       builder: (_, cat, ch) => IconButton(
                                         onPressed: () {
-                                          print(categories[index].id);
+                                          print(products[index].id);
                                           cat.deleteCategory(
-                                              categories[index].id);
+                                              products[index].id);
                                           CustomSnackBar.mySnackBar(context,
-                                              '${categories[index].title} category delete from DB');
+                                              '${products[index].name} category delete from DB');
                                         },
                                         icon: const Icon(
                                           Icons.delete,

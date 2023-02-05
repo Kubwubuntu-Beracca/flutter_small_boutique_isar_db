@@ -1,6 +1,5 @@
 import 'package:boutique/presentation/router/app_router.dart';
-import 'package:boutique/providers/categories.dart';
-import 'package:boutique/providers/products.dart';
+import 'package:boutique/providers/isar_services.dart';
 import 'package:boutique/presentation/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<Products>(create: (_) => Products()),
-        ChangeNotifierProvider<Categories>(create: (_) => Categories()),
+        ChangeNotifierProvider<IsarServices>(create: (_) => IsarServices()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
