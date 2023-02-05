@@ -71,6 +71,27 @@ class IsarServices with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> deleteProduct(id) async {
+    final isar = await db;
+    isar.writeTxn(() async {
+      final success = await isar.products.delete(id);
+      final existingProdIndex = _products.indexWhere((cat) => cat.id == id);
+      Product existingProd = _products[existingProdIndex];
+      print('Product deleted:${success}');
+      if (success == true) {
+        _products.removeAt(existingProdIndex);
+        notifyListeners();
+      } else {
+        _products.insert(existingProdIndex, existingProd);
+        notifyListeners();
+      }
+    });
+  }
+
+  Product findProdById(id) {
+    return _products.firstWhere((cat) => cat.id == id);
+  }
+
   Future<Isar> openDB() async {
     if (Isar.instanceNames.isEmpty) {
       return await Isar.open(

@@ -75,7 +75,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                     IconButton(
                                       onPressed: () {
                                         Navigator.of(context).pushNamed(
-                                          AddCategoryScreen.routeName,
+                                          AddProuctScreen.routeName,
                                           arguments: products[index].id,
                                         );
                                         print('Id:${products[index].id}');
@@ -86,13 +86,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                       ),
                                     ),
                                     Consumer<IsarServices>(
-                                      builder: (_, cat, ch) => IconButton(
+                                      builder: (_, prod, ch) => IconButton(
                                         onPressed: () {
                                           print(products[index].id);
-                                          cat.deleteCategory(
+                                          prod.deleteProduct(
                                               products[index].id);
                                           CustomSnackBar.mySnackBar(context,
-                                              '${products[index].name} category delete from DB');
+                                              '${products[index].name} product delete from DB');
                                         },
                                         icon: const Icon(
                                           Icons.delete,

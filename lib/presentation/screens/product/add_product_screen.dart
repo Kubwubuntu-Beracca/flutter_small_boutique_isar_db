@@ -32,6 +32,16 @@ class _AddProuctScreenState extends State<AddProuctScreen> {
   @override
   void didChangeDependencies() async {
     if (_isInit) {
+      final prodId = ModalRoute.of(context)!.settings.arguments;
+      if (prodId != null) {
+        final foundProd = Provider.of<IsarServices>(context, listen: false)
+            .findProdById(prodId);
+        verifierId = foundProd.id.toString();
+        titleController.text = foundProd.name;
+        priceController.text = foundProd.price;
+        dropdwnItem = foundProd.category;
+        print('category:${foundProd.name}');
+      }
       await Provider.of<IsarServices>(
         context,
       ).getAllCategories();
@@ -128,7 +138,7 @@ class _AddProuctScreenState extends State<AddProuctScreen> {
                   _saveForm();
                   _clear();
                 },
-                child: const Text('Add'),
+                child: const Text('Save'),
               )
             ],
           ),

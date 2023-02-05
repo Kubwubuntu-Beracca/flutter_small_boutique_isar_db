@@ -1,6 +1,5 @@
 import 'package:boutique/presentation/screens/cart_screen.dart';
 import 'package:boutique/providers/cart.dart';
-import 'package:boutique/services/isar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +45,6 @@ class _ProductsOverViewState extends State<ProductsOverView> {
                   child: IconButton(
                     icon: const Icon(Icons.shopping_cart),
                     onPressed: () {
-                      print('Pressed');
                       Navigator.of(context).pushNamed(CartScreen.routeName);
                     },
                   ),
