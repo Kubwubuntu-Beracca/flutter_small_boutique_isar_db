@@ -1,7 +1,6 @@
 import 'package:boutique/models/product.dart';
 import 'package:boutique/providers/isar_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_drop_down_menu/flutter_drop_down.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/category.dart';

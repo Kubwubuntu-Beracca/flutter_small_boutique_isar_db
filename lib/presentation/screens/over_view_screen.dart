@@ -1,4 +1,4 @@
-import 'package:boutique/presentation/screens/cart_screen.dart';
+import 'package:boutique/presentation/screens/cart/cart_screen.dart';
 import 'package:boutique/providers/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
