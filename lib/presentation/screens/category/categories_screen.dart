@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/isar_services.dart';
-import '../../../widgets/show_snackbar.dart';
+import '../../../widgets/show_snackbar_item.dart';
 
 class CategoriesScreen extends StatefulWidget {
   static const routeName = '/categories';

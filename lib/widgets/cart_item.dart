@@ -11,10 +11,7 @@ class CartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.shopping_cart),
-        ),
+        child,
         Positioned(
           right: 8,
           top: 8,

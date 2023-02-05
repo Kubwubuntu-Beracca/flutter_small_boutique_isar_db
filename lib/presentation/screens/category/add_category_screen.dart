@@ -2,7 +2,7 @@
 
 import 'package:boutique/models/category.dart';
 import 'package:boutique/providers/isar_services.dart';
-import 'package:boutique/widgets/show_snackbar.dart';
+import 'package:boutique/widgets/show_snackbar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';

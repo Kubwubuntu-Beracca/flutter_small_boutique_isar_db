@@ -1,3 +1,4 @@
+import 'package:boutique/presentation/screens/cart_screen.dart';
 import 'package:boutique/providers/cart.dart';
 import 'package:boutique/services/isar_service.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class _ProductsOverViewState extends State<ProductsOverView> {
     final products = Provider.of<IsarServices>(context, listen: false).products;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Boutique App'),
+        title: const Text('Boutique app'),
         actions: [
           Consumer<Cart>(
             builder: ((_, cart, ch) => CartWidget(
@@ -45,7 +46,8 @@ class _ProductsOverViewState extends State<ProductsOverView> {
                   child: IconButton(
                     icon: const Icon(Icons.shopping_cart),
                     onPressed: () {
-                      Navigator.of(context);
+                      print('Pressed');
+                      Navigator.of(context).pushNamed(CartScreen.routeName);
                     },
                   ),
                 )),

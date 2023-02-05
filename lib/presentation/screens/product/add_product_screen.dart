@@ -5,7 +5,7 @@ import 'package:flutter_drop_down_menu/flutter_drop_down.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/category.dart';
-import '../../../widgets/show_snackbar.dart';
+import '../../../widgets/show_snackbar_item.dart';
 
 class AddProuctScreen extends StatefulWidget {
   static const routeName = '/add-product';
