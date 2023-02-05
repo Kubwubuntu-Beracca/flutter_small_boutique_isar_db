@@ -39,14 +39,7 @@ const ProductSchema = CollectionSchema(
   deserializeProp: _productDeserializeProp,
   idName: r'id',
   indexes: {},
-  links: {
-    r'categories': LinkSchema(
-      id: -6951042170429971781,
-      name: r'categories',
-      target: r'Category',
-      single: false,
-    )
-  },
+  links: {},
   embeddedSchemas: {},
   getId: _productGetId,
   getLinks: _productGetLinks,
@@ -114,13 +107,11 @@ Id _productGetId(Product object) {
 }
 
 List<IsarLinkBase<dynamic>> _productGetLinks(Product object) {
-  return [object.categories];
+  return [];
 }
 
 void _productAttach(IsarCollection<dynamic> col, Id id, Product object) {
   object.id = id;
-  object.categories
-      .attach(col, col.isar.collection<Category>(), r'categories', id);
 }
 
 extension ProductQueryWhereSort on QueryBuilder<Product, Product, QWhere> {
@@ -647,65 +638,7 @@ extension ProductQueryObject
     on QueryBuilder<Product, Product, QFilterCondition> {}
 
 extension ProductQueryLinks
-    on QueryBuilder<Product, Product, QFilterCondition> {
-  QueryBuilder<Product, Product, QAfterFilterCondition> categories(
-      FilterQuery<Category> q) {
-    return QueryBuilder.apply(this, (query) {
-      return query.link(q, r'categories');
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition> categoriesLengthEqualTo(
-      int length) {
-    return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'categories', length, true, length, true);
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition> categoriesIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'categories', 0, true, 0, true);
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition> categoriesIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'categories', 0, false, 999999, true);
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      categoriesLengthLessThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'categories', 0, true, length, include);
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      categoriesLengthGreaterThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'categories', length, include, 999999, true);
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition> categoriesLengthBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.linkLength(
-          r'categories', lower, includeLower, upper, includeUpper);
-    });
-  }
-}
+    on QueryBuilder<Product, Product, QFilterCondition> {}
 
 extension ProductQuerySortBy on QueryBuilder<Product, Product, QSortBy> {
   QueryBuilder<Product, Product, QAfterSortBy> sortByCategory() {

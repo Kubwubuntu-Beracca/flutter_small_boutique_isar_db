@@ -1,3 +1,4 @@
+import 'package:boutique/models/product.dart';
 import 'package:isar/isar.dart';
 part 'category.g.dart';
 

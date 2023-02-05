@@ -1,9 +1,11 @@
 import 'package:boutique/presentation/router/app_router.dart';
 import 'package:boutique/providers/categories.dart';
 import 'package:boutique/providers/products.dart';
-import 'package:boutique/presentation/screens/home_screen.dart';
+import 'package:boutique/presentation/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'presentation/screens/category/add_category_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: HomeScreen(),
-        onGenerateRoute: _appRouter.onGeneratedRoute,
+        routes: _appRouter.routes,
       ),
     );
   }
