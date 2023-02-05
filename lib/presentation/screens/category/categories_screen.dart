@@ -56,57 +56,67 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             )
           : Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                        itemCount: categories.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: ListTile(
-                              leading: Text(categories[index].id.toString()),
-                              title: Text(categories[index].title),
-                              trailing: SizedBox(
-                                width: 100,
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pushNamed(
-                                          AddCategoryScreen.routeName,
-                                          arguments: categories[index].id,
-                                        );
-                                        print('Id:${categories[index].id}');
-                                      },
-                                      icon: const Icon(
-                                        Icons.edit,
-                                        color: Colors.black45,
+              child: (categories.isEmpty || categories == null)
+                  ? const Center(
+                      child: Text(
+                        'No categories added yet',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    )
+                  : Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                              itemCount: categories.length,
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  child: ListTile(
+                                    leading:
+                                        Text(categories[index].id.toString()),
+                                    title: Text(categories[index].title),
+                                    trailing: SizedBox(
+                                      width: 100,
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pushNamed(
+                                                AddCategoryScreen.routeName,
+                                                arguments: categories[index].id,
+                                              );
+                                              print(
+                                                  'Id:${categories[index].id}');
+                                            },
+                                            icon: const Icon(
+                                              Icons.edit,
+                                              color: Colors.black45,
+                                            ),
+                                          ),
+                                          Consumer<IsarServices>(
+                                            builder: (_, cat, ch) => IconButton(
+                                              onPressed: () {
+                                                print(categories[index].id);
+                                                cat.deleteCategory(
+                                                    categories[index].id);
+                                                CustomSnackBar.mySnackBar(
+                                                    context,
+                                                    '${categories[index].title} category delete from DB');
+                                              },
+                                              icon: const Icon(
+                                                Icons.delete,
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Consumer<IsarServices>(
-                                      builder: (_, cat, ch) => IconButton(
-                                        onPressed: () {
-                                          print(categories[index].id);
-                                          cat.deleteCategory(
-                                              categories[index].id);
-                                          CustomSnackBar.mySnackBar(context,
-                                              '${categories[index].title} category delete from DB');
-                                        },
-                                        icon: const Icon(
-                                          Icons.delete,
-                                          color: Colors.red,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        }),
-                  )
-                ],
-              ),
+                                  ),
+                                );
+                              }),
+                        )
+                      ],
+                    ),
             ),
     );
   }

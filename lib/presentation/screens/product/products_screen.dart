@@ -57,58 +57,68 @@ class _ProductsScreenState extends State<ProductsScreen> {
             )
           : Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                        itemCount: products.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: ListTile(
-                              leading: Text(products[index].id.toString()),
-                              title: Text(products[index].name),
-                              subtitle: Text(products[index].price),
-                              trailing: SizedBox(
-                                width: 100,
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pushNamed(
-                                          AddProuctScreen.routeName,
-                                          arguments: products[index].id,
-                                        );
-                                        print('Id:${products[index].id}');
-                                      },
-                                      icon: const Icon(
-                                        Icons.edit,
-                                        color: Colors.black45,
+              child: (products.isEmpty || products == null)
+                  ? const Center(
+                      child: Text(
+                        'No products added yet',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    )
+                  : Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                              itemCount: products.length,
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  child: ListTile(
+                                    leading:
+                                        Text(products[index].id.toString()),
+                                    title: Text(products[index].name),
+                                    subtitle: Text(products[index].price),
+                                    trailing: SizedBox(
+                                      width: 100,
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pushNamed(
+                                                AddProuctScreen.routeName,
+                                                arguments: products[index].id,
+                                              );
+                                              print('Id:${products[index].id}');
+                                            },
+                                            icon: const Icon(
+                                              Icons.edit,
+                                              color: Colors.black45,
+                                            ),
+                                          ),
+                                          Consumer<IsarServices>(
+                                            builder: (_, prod, ch) =>
+                                                IconButton(
+                                              onPressed: () {
+                                                print(products[index].id);
+                                                prod.deleteProduct(
+                                                    products[index].id);
+                                                CustomSnackBar.mySnackBar(
+                                                    context,
+                                                    '${products[index].name} product delete from DB');
+                                              },
+                                              icon: const Icon(
+                                                Icons.delete,
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Consumer<IsarServices>(
-                                      builder: (_, prod, ch) => IconButton(
-                                        onPressed: () {
-                                          print(products[index].id);
-                                          prod.deleteProduct(
-                                              products[index].id);
-                                          CustomSnackBar.mySnackBar(context,
-                                              '${products[index].name} product delete from DB');
-                                        },
-                                        icon: const Icon(
-                                          Icons.delete,
-                                          color: Colors.red,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        }),
-                  )
-                ],
-              ),
+                                  ),
+                                );
+                              }),
+                        )
+                      ],
+                    ),
             ),
     );
   }
