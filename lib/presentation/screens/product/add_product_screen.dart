@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:boutique/models/product.dart';
 import 'package:boutique/providers/isar_services.dart';
 import 'package:flutter/material.dart';
@@ -101,6 +103,7 @@ class _AddProuctScreenState extends State<AddProuctScreen> {
                       decoration: const InputDecoration(labelText: 'Title'),
                     ),
                     TextFormField(
+                      keyboardType: TextInputType.number,
                       controller: priceController,
                       decoration: const InputDecoration(labelText: 'Price'),
                     ),
