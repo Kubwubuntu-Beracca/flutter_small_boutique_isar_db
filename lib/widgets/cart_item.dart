@@ -3,7 +3,9 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class CartWidget extends StatelessWidget {
-  const CartWidget({super.key});
+  final String? value;
+  Widget child;
+  CartWidget({required this.value, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +28,10 @@ class CartWidget extends StatelessWidget {
               minWidth: 16,
               minHeight: 16,
             ),
-            child: const Text(
+            child: Text(
               textAlign: TextAlign.center,
-              '1',
-              style: TextStyle(
+              value!,
+              style: const TextStyle(
                 fontSize: 10,
               ),
             ),

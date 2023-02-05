@@ -1,4 +1,5 @@
 import 'package:boutique/presentation/router/app_router.dart';
+import 'package:boutique/providers/cart.dart';
 import 'package:boutique/providers/isar_services.dart';
 import 'package:boutique/presentation/screens/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<IsarServices>(create: (_) => IsarServices()),
+        ChangeNotifierProvider<Cart>(create: (_) => Cart()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

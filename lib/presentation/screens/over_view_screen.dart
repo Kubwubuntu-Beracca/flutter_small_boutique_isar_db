@@ -1,9 +1,10 @@
+import 'package:boutique/providers/cart.dart';
 import 'package:boutique/services/isar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/isar_services.dart';
-import '../../widgets/cart.dart';
+import '../../widgets/cart_item.dart';
 
 class ProductsOverView extends StatefulWidget {
   const ProductsOverView({super.key});
@@ -37,7 +38,19 @@ class _ProductsOverViewState extends State<ProductsOverView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Boutique App'),
-        actions: const [CartWidget()],
+        actions: [
+          Consumer<Cart>(
+            builder: ((_, cart, ch) => CartWidget(
+                  value: cart.itemCount.toString(),
+                  child: IconButton(
+                    icon: const Icon(Icons.shopping_cart),
+                    onPressed: () {
+                      Navigator.of(context);
+                    },
+                  ),
+                )),
+          )
+        ],
       ),
       body: _isLoading
           ? const Center(
@@ -61,10 +74,31 @@ class _ProductsOverViewState extends State<ProductsOverView> {
                         child: GridTile(
                           footer: GridTileBar(
                             backgroundColor: Colors.black54,
-                            leading: const Text('Price'),
-                            title: Text(
-                              products[index].price,
-                              style: const TextStyle(color: Colors.black),
+                            leading: Text(
+                              '${products[index].price} FBU',
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 12,
+                              ),
+                            ),
+                            title: Container(),
+                            trailing: Container(
+                              width: 50.0,
+                              child: Consumer<Cart>(
+                                builder: ((context, value, child) => IconButton(
+                                      icon: const Icon(Icons.shopping_cart),
+                                      onPressed: () {
+                                        Provider.of<Cart>(context,
+                                                listen: false)
+                                            .addItem(
+                                          products[index].id.toString(),
+                                          int.parse(products[index].price),
+                                          products[index].name,
+                                          products[index].category,
+                                        );
+                                      },
+                                    )),
+                              ),
                             ),
                           ),
                           child: Center(child: Text(products[index].name)),
